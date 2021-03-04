@@ -1,61 +1,52 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://MainScene.gd" type="Script" id=1]
 [ext_resource path="res://images/logo.png" type="Texture" id=2]
-[ext_resource path="res://ColorPanel.gd" type="Script" id=3]
+[ext_resource path="res://EmotionsPanel.gd" type="Script" id=3]
+[ext_resource path="res://ColorSelectPanel.gd" type="Script" id=4]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="MainMenuContainer" type="MarginContainer" parent="."]
+[node name="MainMenuPanel" type="Panel" parent="."]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_right = 800.0
 margin_bottom = 600.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuContainer"]
-margin_right = 800.0
-margin_bottom = 600.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="MainMenuContainer/VBoxContainer"]
-margin_right = 800.0
-margin_bottom = 200.0
-
-[node name="LogoRect" type="TextureRect" parent="MainMenuContainer/VBoxContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuPanel"]
 margin_left = 300.0
 margin_right = 500.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenuPanel/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 200.0
+
+[node name="LogoRect" type="TextureRect" parent="MainMenuPanel/VBoxContainer/CenterContainer"]
+margin_right = 200.0
 margin_bottom = 200.0
 texture = ExtResource( 2 )
 
-[node name="NewImageLabel" type="Label" parent="MainMenuContainer/VBoxContainer"]
+[node name="NewImageButton" type="Button" parent="MainMenuPanel/VBoxContainer"]
 margin_top = 204.0
-margin_right = 800.0
-margin_bottom = 218.0
-text = "New Image"
-align = 1
+margin_right = 200.0
+margin_bottom = 224.0
+text = "New Entry"
 
-[node name="DiaryLabel" type="Label" parent="MainMenuContainer/VBoxContainer"]
-margin_top = 222.0
-margin_right = 800.0
-margin_bottom = 236.0
+[node name="DiaryButton" type="Button" parent="MainMenuPanel/VBoxContainer"]
+margin_top = 228.0
+margin_right = 200.0
+margin_bottom = 248.0
 text = "Diary"
-align = 1
 
-[node name="NameLabel" type="Label" parent="MainMenuContainer/VBoxContainer"]
-margin_top = 240.0
-margin_right = 800.0
-margin_bottom = 254.0
-text = "Alex Achramowicz"
-align = 1
-
-[node name="ColorPanel" type="Panel" parent="."]
+[node name="EmotionsPanel" type="Panel" parent="."]
+visible = false
 margin_right = 800.0
 margin_bottom = 600.0
 script = ExtResource( 3 )
@@ -63,122 +54,291 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label1" type="Label" parent="ColorPanel"]
+[node name="HomeButton" type="Button" parent="EmotionsPanel"]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -75.2275
-margin_top = -210.0
-margin_right = 85.0
-margin_bottom = -179.0
-text = "Generated Color Options"
+margin_left = -25.5
+margin_top = 20.0
+margin_right = 25.5
+margin_bottom = 20.0
+text = "Home"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EmotionsLabel" type="Label" parent="EmotionsPanel"]
+margin_left = 100.0
+margin_top = 125.0
+margin_right = 700.0
+margin_bottom = 164.0
+text = "How would you describe your current mood?
+(ctrl+left-click to multiselect or deselect)"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect1" type="ColorRect" parent="ColorPanel"]
-margin_left = 125.0
-margin_top = 125.0
-margin_right = 225.0
-margin_bottom = 225.0
+[node name="EmotionsList" type="ItemList" parent="EmotionsPanel"]
+margin_left = 350.0
+margin_top = 168.0
+margin_right = 450.0
+margin_bottom = 365.0
+select_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="ColorRect" parent="ColorPanel"]
-margin_left = 275.0
-margin_top = 125.0
-margin_right = 375.0
-margin_bottom = 225.0
-color = Color( 0, 0.180392, 0.886275, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect3" type="ColorRect" parent="ColorPanel"]
-margin_left = 425.0
-margin_top = 125.0
-margin_right = 525.0
-margin_bottom = 225.0
-color = Color( 0.764706, 0.113725, 0.113725, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect4" type="ColorRect" parent="ColorPanel"]
-margin_left = 575.0
-margin_top = 125.0
-margin_right = 675.0
-margin_bottom = 225.0
-color = Color( 0.101961, 1, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="ColorPanel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -75.0
-margin_top = -50.0
-margin_right = 75.0
-margin_bottom = -30.0
-text = "Regenerate Colors"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="ColorPanel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -75.2275
-margin_top = 40.0
-margin_right = 85.0
-text = "Choose your own colors!
-"
+[node name="EmotionsSelectedLabel" type="Label" parent="EmotionsPanel"]
+margin_left = 100.0
+margin_top = 375.0
+margin_right = 700.0
+margin_bottom = 164.0
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="ColorPanel"]
+[node name="EmotionsButton" type="Button" parent="EmotionsPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -25.5
+margin_top = 400.0
+margin_right = 25.5
+margin_bottom = 20.0
+text = "Go"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorsPanel" type="Panel" parent="."]
+visible = false
+margin_right = 800.0
+margin_bottom = 600.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorOptionsLabel" type="Label" parent="ColorsPanel"]
+margin_left = 100.0
+margin_top = 125.0
+margin_right = 700.0
+margin_bottom = 139.0
+text = "Please select the colors that appeal to you, or capture how you are feeling today"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorOptionsContainer" type="HBoxContainer" parent="ColorsPanel"]
 margin_left = 125.0
-margin_top = 375.0
-margin_right = 225.0
-margin_bottom = 475.0
-color = Color( 0.384314, 0.176471, 0.176471, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorPickerButton2" type="ColorPickerButton" parent="ColorPanel"]
-margin_left = 275.0
-margin_top = 375.0
-margin_right = 375.0
-margin_bottom = 475.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorPickerButton3" type="ColorPickerButton" parent="ColorPanel"]
-margin_left = 425.0
-margin_top = 375.0
-margin_right = 525.0
-margin_bottom = 475.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorPickerButton4" type="ColorPickerButton" parent="ColorPanel"]
-margin_left = 575.0
-margin_top = 375.0
+margin_top = 150.0
 margin_right = 675.0
-margin_bottom = 475.0
+margin_bottom = 250.0
+custom_constants/separation = 50
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorsPanel/ColorOptionsContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="ColorsPanel/ColorOptionsContainer/MarginContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="ColorsPanel/ColorOptionsContainer"]
+margin_left = 150.0
+margin_right = 250.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="ColorsPanel/ColorOptionsContainer/MarginContainer2"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="MarginContainer3" type="MarginContainer" parent="ColorsPanel/ColorOptionsContainer"]
+margin_left = 300.0
+margin_right = 400.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="ColorsPanel/ColorOptionsContainer/MarginContainer3"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="MarginContainer4" type="MarginContainer" parent="ColorsPanel/ColorOptionsContainer"]
+margin_left = 450.0
+margin_right = 550.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="ColorsPanel/ColorOptionsContainer/MarginContainer4"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="RegenerateContainer" type="HBoxContainer" parent="ColorsPanel"]
+margin_left = 125.0
+margin_top = 275.0
+margin_right = 675.0
+margin_bottom = 295.0
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorsPanel/RegenerateContainer"]
+margin_right = 100.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button1" type="Button" parent="ColorsPanel/RegenerateContainer/MarginContainer"]
+margin_right = 100.0
+margin_bottom = 20.0
+text = "Regenerate"
+
+[node name="MarginContainer2" type="MarginContainer" parent="ColorsPanel/RegenerateContainer"]
+margin_left = 150.0
+margin_right = 250.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button2" type="Button" parent="ColorsPanel/RegenerateContainer/MarginContainer2"]
+margin_right = 100.0
+margin_bottom = 20.0
+text = "Regenerate"
+
+[node name="MarginContainer3" type="MarginContainer" parent="ColorsPanel/RegenerateContainer"]
+margin_left = 300.0
+margin_right = 400.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button3" type="Button" parent="ColorsPanel/RegenerateContainer/MarginContainer3"]
+margin_right = 100.0
+margin_bottom = 20.0
+text = "Regenerate"
+
+[node name="MarginContainer4" type="MarginContainer" parent="ColorsPanel/RegenerateContainer"]
+margin_left = 450.0
+margin_right = 550.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button4" type="Button" parent="ColorsPanel/RegenerateContainer/MarginContainer4"]
+margin_right = 100.0
+margin_bottom = 20.0
+text = "Regenerate"
+
+[node name="ColorSelectLabel" type="Label" parent="ColorsPanel"]
+margin_left = 100.0
+margin_top = 325.0
+margin_right = 700.0
+margin_bottom = 325.0
+text = "Choose your own colors?"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorSelectButton" type="CheckButton" parent="ColorsPanel/ColorSelectLabel"]
+margin_left = 379.311
+margin_top = -13.0274
+margin_right = 455.311
+margin_bottom = 26.9726
+action_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorSelectContainer" type="HBoxContainer" parent="ColorsPanel"]
+margin_left = 125.0
+margin_top = 350.0
+margin_right = 675.0
+margin_bottom = 450.0
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorsPanel/ColorSelectContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="ColorsPanel/ColorSelectContainer/MarginContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="ColorsPanel/ColorSelectContainer"]
+margin_left = 150.0
+margin_right = 250.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="ColorsPanel/ColorSelectContainer/MarginContainer2"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="MarginContainer3" type="MarginContainer" parent="ColorsPanel/ColorSelectContainer"]
+margin_left = 300.0
+margin_right = 400.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="ColorsPanel/ColorSelectContainer/MarginContainer3"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="MarginContainer4" type="MarginContainer" parent="ColorsPanel/ColorSelectContainer"]
+margin_left = 450.0
+margin_right = 550.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="ColorsPanel/ColorSelectContainer/MarginContainer4"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="GenerateButton" type="Button" parent="ColorsPanel"]
+margin_left = 375.0
+margin_top = 475.0
+margin_right = 375.0
+margin_bottom = 495.0
+action_mode = 0
+text = "Generate!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GenerateArtRect" type="TextureRect" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="MainMenuPanel/VBoxContainer/NewImageButton" to="." method="_on_NewImageButton_pressed"]
+[connection signal="pressed" from="EmotionsPanel/HomeButton" to="." method="_on_HomeButton_pressed"]
+[connection signal="multi_selected" from="EmotionsPanel/EmotionsList" to="EmotionsPanel" method="_on_EmotionsList_multi_selected"]
+[connection signal="pressed" from="EmotionsPanel/EmotionsButton" to="." method="_on_EmotionsButton_pressed"]
+[connection signal="pressed" from="ColorsPanel/RegenerateContainer/MarginContainer/Button1" to="ColorsPanel" method="_on_Button1_pressed"]
+[connection signal="pressed" from="ColorsPanel/RegenerateContainer/MarginContainer2/Button2" to="ColorsPanel" method="_on_Button2_pressed"]
+[connection signal="pressed" from="ColorsPanel/RegenerateContainer/MarginContainer3/Button3" to="ColorsPanel" method="_on_Button3_pressed"]
+[connection signal="pressed" from="ColorsPanel/RegenerateContainer/MarginContainer4/Button4" to="ColorsPanel" method="_on_Button4_pressed"]
+[connection signal="toggled" from="ColorsPanel/ColorSelectLabel/ColorSelectButton" to="ColorsPanel" method="_on_ColorSelectButton_toggled"]
+[connection signal="pressed" from="ColorsPanel/GenerateButton" to="." method="_on_GenerateButton_pressed"]
