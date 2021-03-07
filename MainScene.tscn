@@ -4,18 +4,9 @@
 [ext_resource path="res://images/logo.png" type="Texture" id=2]
 [ext_resource path="res://EmotionsPanel.gd" type="Script" id=3]
 [ext_resource path="res://ColorSelectPanel.gd" type="Script" id=4]
-[ext_resource path="res://ImagePanel.gd" type="Script" id=5]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-void fragment() {
-	COLOR = vec4(UV.x, UV.y, 0.5, 1.0);
-}
-"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[ext_resource path="res://BGPanel.gd" type="Script" id=5]
+[ext_resource path="res://DiaryPanel.gd" type="Script" id=6]
+[ext_resource path="res://GeneratedImagePanel.gd" type="Script" id=7]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 1 )
@@ -56,6 +47,47 @@ margin_top = 228.0
 margin_right = 200.0
 margin_bottom = 248.0
 text = "Diary"
+
+[node name="DiaryPanel" type="Panel" parent="."]
+visible = false
+margin_right = 800.0
+margin_bottom = 600.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DiaryLabel" type="Label" parent="DiaryPanel"]
+anchor_right = 1.0
+margin_top = 75.0
+margin_bottom = 14.0
+text = "Diary"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DiaryItemlist" type="ItemList" parent="DiaryPanel"]
+anchor_right = 1.0
+margin_left = 50.0
+margin_top = 100.0
+margin_right = -50.0
+margin_bottom = 525.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HomeButton" type="Button" parent="DiaryPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -25.5
+margin_top = 25.0
+margin_right = 25.5
+margin_bottom = 20.0
+text = "Home"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="EmotionsPanel" type="Panel" parent="."]
 visible = false
@@ -122,6 +154,7 @@ __meta__ = {
 }
 
 [node name="ColorsPanel" type="Panel" parent="."]
+visible = false
 margin_right = 800.0
 margin_bottom = 600.0
 script = ExtResource( 4 )
@@ -345,27 +378,94 @@ __meta__ = {
 }
 
 [node name="ImagePanel" type="Panel" parent="."]
-visible = false
 margin_right = 800.0
 margin_bottom = 600.0
-script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-material = SubResource( 2 )
-margin_right = 800.0
-margin_bottom = 600.0
+[node name="ImageControl" type="Control" parent="ImagePanel"]
+margin_left = 150.0
+margin_top = 100.0
+margin_right = 650.0
+margin_bottom = 500.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ViewportContainer" type="ViewportContainer" parent="ImagePanel/ImageControl"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="ImagePanel/ImageControl/ViewportContainer"]
+size = Vector2( 500, 400 )
+handle_input_locally = false
+render_target_update_mode = 3
+gui_disable_input = true
+
+[node name="GeneratedImagePanel" type="Panel" parent="ImagePanel/ImageControl/ViewportContainer/Viewport"]
+show_behind_parent = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGPanel" type="Panel" parent="ImagePanel/ImageControl/ViewportContainer/Viewport/GeneratedImagePanel"]
+show_behind_parent = true
+script = ExtResource( 5 )
+
+[node name="HomeButton" type="Button" parent="ImagePanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -25.5
+margin_top = 50.0
+margin_right = 25.5
+margin_bottom = 20.0
+text = "Home"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ImagePanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -400.0
+margin_top = 525.0
+margin_right = 400.0
+margin_bottom = 550.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RegenerateButton" type="Button" parent="ImagePanel/HBoxContainer"]
+margin_left = 268.0
+margin_right = 352.0
+margin_bottom = 25.0
+text = "Regenerate"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="ImagePanel/HBoxContainer"]
+margin_left = 356.0
+margin_right = 442.0
+margin_bottom = 25.0
+text = "Background"
+color = Color( 1, 1, 1, 1 )
+
+[node name="SaveButton" type="Button" parent="ImagePanel/HBoxContainer"]
+margin_left = 446.0
+margin_right = 531.0
+margin_bottom = 25.0
+text = "Save Image"
 [connection signal="pressed" from="MainMenuPanel/VBoxContainer/NewImageButton" to="." method="_on_NewImageButton_pressed"]
-[connection signal="pressed" from="EmotionsPanel/HomeButton" to="." method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="MainMenuPanel/VBoxContainer/DiaryButton" to="." method="_on_DiaryButton_pressed"]
+[connection signal="pressed" from="DiaryPanel/HomeButton" to="EmotionsPanel" method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="DiaryPanel/HomeButton" to="." method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="EmotionsPanel/HomeButton" to="EmotionsPanel" method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="EmotionsPanel/HomeButton" to="." method="_on_HomeButton_pressed"]
 [connection signal="multi_selected" from="EmotionsPanel/EmotionsList" to="EmotionsPanel" method="_on_EmotionsList_multi_selected"]
 [connection signal="pressed" from="EmotionsPanel/EmotionsButton" to="." method="_on_EmotionsButton_pressed"]
+[connection signal="pressed" from="ColorsPanel/HomeButton" to="EmotionsPanel" method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="ColorsPanel/HomeButton" to="." method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="ColorsPanel/RegenerateContainer/MarginContainer/Button1" to="ColorsPanel" method="_on_Button1_pressed"]
 [connection signal="pressed" from="ColorsPanel/RegenerateContainer/MarginContainer2/Button2" to="ColorsPanel" method="_on_Button2_pressed"]
@@ -376,5 +476,10 @@ __meta__ = {
 [connection signal="color_changed" from="ColorsPanel/ColorSelectContainer/MarginContainer2/ColorPickerButton2" to="ColorsPanel" method="_on_ColorPickerButton2_color_changed"]
 [connection signal="color_changed" from="ColorsPanel/ColorSelectContainer/MarginContainer3/ColorPickerButton3" to="ColorsPanel" method="_on_ColorPickerButton3_color_changed"]
 [connection signal="color_changed" from="ColorsPanel/ColorSelectContainer/MarginContainer4/ColorPickerButton4" to="ColorsPanel" method="_on_ColorPickerButton4_color_changed"]
+[connection signal="pressed" from="ColorsPanel/GenerateButton" to="ImagePanel/ImageControl/ViewportContainer/Viewport/GeneratedImagePanel" method="_on_GenerateButton_pressed"]
 [connection signal="pressed" from="ColorsPanel/GenerateButton" to="." method="_on_GenerateButton_pressed"]
-[connection signal="pressed" from="ColorsPanel/GenerateButton" to="ImagePanel" method="_on_GenerateButton_pressed"]
+[connection signal="pressed" from="ImagePanel/HomeButton" to="EmotionsPanel" method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="ImagePanel/HomeButton" to="." method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="ImagePanel/HBoxContainer/RegenerateButton" to="ImagePanel/ImageControl/ViewportContainer/Viewport/GeneratedImagePanel" method="_on_RegenerateButton_pressed"]
+[connection signal="color_changed" from="ImagePanel/HBoxContainer/ColorPickerButton" to="ImagePanel/ImageControl/ViewportContainer/Viewport/GeneratedImagePanel/BGPanel" method="_on_ColorPickerButton_color_changed"]
+[connection signal="pressed" from="ImagePanel/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]

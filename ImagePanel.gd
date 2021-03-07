@@ -14,13 +14,14 @@ func _ready():
 
 
 func _draw():
-	for i in range(rng.randf_range(100, 200)):
+	for i in range(rng.randf_range(400, 600)):
 		circleColor = colors[rng.randf_range(0,colors.size())]
-		circleRadius = rng.randf_range(20,30)
+		circleRadius = rng.randf_range(5,40)
 		draw_circle(Vector2(rng.randf_range(0,800), rng.randf_range(0,600)), circleRadius, circleColor)
 
 
 func _on_GenerateButton_pressed():
+	
 	var sel = get_parent().get_node("ColorsPanel").select
 
 	if(sel):
@@ -32,6 +33,5 @@ func _on_GenerateButton_pressed():
 
 	for i in range(colors.size()): # debug
 		print(colors[i])
-		
-	
+
 	self.update()

@@ -12,6 +12,7 @@ func _ready():
 	print(current_date)
 	
 	$MainMenuPanel.show()
+	$DiaryPanel.hide()
 	$ColorsPanel.hide()
 	$EmotionsPanel.hide()
 	$ImagePanel.hide()
@@ -29,10 +30,6 @@ func _on_NewImageButton_pressed():
 func _on_EmotionsButton_pressed():
 	$EmotionsPanel.hide()
 	$ColorsPanel.show()
-	
-	emotions_chosen = get_node("EmotionsPanel").emotions_selected
-	
-	var list = PoolStringArray(emotions_chosen).join(", ")
 
 #colorspanel
 func _on_GenerateButton_pressed():
@@ -57,7 +54,20 @@ func _on_GenerateButton_pressed():
 func _on_HomeButton_pressed():
 	$EmotionsPanel.hide()
 	$ColorsPanel.hide()
+	$DiaryPanel.hide()
+	$ImagePanel.hide()
 	$MainMenuPanel.show()
 	
 	$EmotionsPanel/EmotionsSelectedLabel.set_text("")
 	$EmotionsPanel/EmotionsList.unselect_all()
+	emotions_chosen = get_node("EmotionsPanel").emotions_selected
+
+
+func _on_DiaryButton_pressed():
+	$MainMenuPanel.hide()
+	$DiaryPanel.show()
+
+
+func _on_SaveButton_pressed():
+	#get_node("ImagePanel/ImageControl/ViewportContainer/Viewport/GeneratedImagePanel")
+	pass

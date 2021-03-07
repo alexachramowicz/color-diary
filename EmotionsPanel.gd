@@ -1,6 +1,10 @@
 extends Panel
 
-var emotions = ["happy", "sad", "angry", "stressed", "anxious", "tired"]
+var emotions = ["happy", "sad", "anxious", "satisfied", "alert", "hopeful", "amused", 
+"prideful", "angry", "disgusted", "grateful", "guilty", "fearful", "offended",
+"indifferent", "betrayed", "contemptful", "ecstatic", "euphoric", "lonely", "tired",
+"melancholy", "loving", "confident", "trusting", "weak", "excited", "cool", "pleasant",
+"positive", "negative", "neutral"]
 var emotions_selected: Array
 
 
