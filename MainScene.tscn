@@ -49,7 +49,6 @@ margin_bottom = 248.0
 text = "Diary"
 
 [node name="DiaryPanel" type="Panel" parent="."]
-visible = false
 margin_right = 800.0
 margin_bottom = 600.0
 script = ExtResource( 6 )
@@ -57,22 +56,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DiaryLabel" type="Label" parent="DiaryPanel"]
-anchor_right = 1.0
-margin_top = 75.0
-margin_bottom = 14.0
-text = "Diary"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="DiaryItemlist" type="ItemList" parent="DiaryPanel"]
 anchor_right = 1.0
 margin_left = 50.0
-margin_top = 100.0
+margin_top = 75.0
 margin_right = -50.0
 margin_bottom = 525.0
+icon_scale = 0.75
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -83,7 +73,7 @@ anchor_right = 0.5
 margin_left = -25.5
 margin_top = 25.0
 margin_right = 25.5
-margin_bottom = 20.0
+margin_bottom = 45.0
 text = "Home"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -378,6 +368,7 @@ __meta__ = {
 }
 
 [node name="ImagePanel" type="Panel" parent="."]
+visible = false
 margin_right = 800.0
 margin_bottom = 600.0
 __meta__ = {
@@ -401,7 +392,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="ImagePanel/ImageControl/ViewportContainer"]
 size = Vector2( 500, 400 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 gui_disable_input = true
 
 [node name="GeneratedImagePanel" type="Panel" parent="ImagePanel/ImageControl/ViewportContainer/Viewport"]
@@ -461,10 +452,12 @@ text = "Save Image"
 [connection signal="pressed" from="MainMenuPanel/VBoxContainer/DiaryButton" to="." method="_on_DiaryButton_pressed"]
 [connection signal="pressed" from="DiaryPanel/HomeButton" to="EmotionsPanel" method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="DiaryPanel/HomeButton" to="." method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="EmotionsPanel/HomeButton" to="ColorsPanel" method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="EmotionsPanel/HomeButton" to="EmotionsPanel" method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="EmotionsPanel/HomeButton" to="." method="_on_HomeButton_pressed"]
 [connection signal="multi_selected" from="EmotionsPanel/EmotionsList" to="EmotionsPanel" method="_on_EmotionsList_multi_selected"]
 [connection signal="pressed" from="EmotionsPanel/EmotionsButton" to="." method="_on_EmotionsButton_pressed"]
+[connection signal="pressed" from="ColorsPanel/HomeButton" to="ColorsPanel" method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="ColorsPanel/HomeButton" to="EmotionsPanel" method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="ColorsPanel/HomeButton" to="." method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="ColorsPanel/RegenerateContainer/MarginContainer/Button1" to="ColorsPanel" method="_on_Button1_pressed"]
@@ -478,6 +471,7 @@ text = "Save Image"
 [connection signal="color_changed" from="ColorsPanel/ColorSelectContainer/MarginContainer4/ColorPickerButton4" to="ColorsPanel" method="_on_ColorPickerButton4_color_changed"]
 [connection signal="pressed" from="ColorsPanel/GenerateButton" to="ImagePanel/ImageControl/ViewportContainer/Viewport/GeneratedImagePanel" method="_on_GenerateButton_pressed"]
 [connection signal="pressed" from="ColorsPanel/GenerateButton" to="." method="_on_GenerateButton_pressed"]
+[connection signal="pressed" from="ImagePanel/HomeButton" to="ColorsPanel" method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="ImagePanel/HomeButton" to="EmotionsPanel" method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="ImagePanel/HomeButton" to="." method="_on_HomeButton_pressed"]
 [connection signal="pressed" from="ImagePanel/HBoxContainer/RegenerateButton" to="ImagePanel/ImageControl/ViewportContainer/Viewport/GeneratedImagePanel" method="_on_RegenerateButton_pressed"]

@@ -6,18 +6,21 @@ var list
 var colors: PoolColorArray
 var emotions: Array
 
+var shape_range
+var bg_color: Color
 var shape: int
 var xy_vec: Vector2
 
-var shape_range
 var circle_radius: float
 var rand_color: Color
-var bg_color: Color
 
 var start
 var end
 var count
 var arc_radius
+
+var pool: PoolVector2Array = PoolVector2Array([Vector2(0,0),Vector2(500,0),Vector2(500,400),Vector2(0,400)])
+var color_pool: PoolVector2Array
 
 var dynamic_font = DynamicFont.new()
 var rng = RandomNumberGenerator.new()
@@ -30,7 +33,7 @@ func _ready():
 
 func _draw():
 	
-	shape = rng.randi_range(1,2)
+	shape = rng.randi_range(1,3)
 	if(shape == 1): # circle
 		shape_range = rng.randf_range(500,750)
 		for i in range(shape_range):
@@ -38,6 +41,11 @@ func _draw():
 			rand_color = colors[rng.randf_range(0,colors.size())]
 			circle_radius = rng.randf_range(5,40)
 			draw_circle(xy_vec, circle_radius, rand_color)
+
+	elif(shape==2): # mesh
+		color_pool = pool
+		pool.invert()
+		draw_primitive(pool, colors, color_pool)
 
 	else:
 		shape_range = rng.randf_range(100,200)

@@ -1,9 +1,9 @@
 extends Panel
 
-var rng = RandomNumberGenerator.new()
 var pool_colors: PoolColorArray
 var select_colors: PoolColorArray
 var select: bool
+var rng = RandomNumberGenerator.new()
 
 
 # main
@@ -23,6 +23,7 @@ func _ready():
 
 
 func _init_colors():
+
 	for i in range(4):
 		pool_colors.append(Color(rng.randf(), rng.randf(), rng.randf(), rng.randf()))
 		print(pool_colors[i])
@@ -84,3 +85,19 @@ func _on_ColorPickerButton3_color_changed(color):
 
 func _on_ColorPickerButton4_color_changed(color):
 	select_colors.set(3, color)
+
+
+func _on_HomeButton_pressed():
+	for i in range(4):
+		pool_colors.set(i, Color(rng.randf(), rng.randf(), rng.randf(), rng.randf()))
+		print(pool_colors[i])
+	
+	$ColorOptionsContainer/MarginContainer/ColorRect.color = pool_colors[0]
+	$ColorOptionsContainer/MarginContainer2/ColorRect.color = pool_colors[1]
+	$ColorOptionsContainer/MarginContainer3/ColorRect.color = pool_colors[2]
+	$ColorOptionsContainer/MarginContainer4/ColorRect.color = pool_colors[3]
+	
+#	$ColorSelectLabel/ColorSelectButton.toggle_mode = false
+#	$ColorSelectContainer.hide()
+#	$RegenerateContainer.show()
+#	$ColorOptionsContainer.show()

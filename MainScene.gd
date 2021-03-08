@@ -2,14 +2,9 @@ extends Node2D
 
 
 var emotions_chosen: Array
-var colors_chosen: PoolColorArray
 
 
 func _ready():
-	
-	var date = OS.get_date()
-	var current_date = String(date.month) + "/" + String(date.day) + "/" + String(date.year)
-	print(current_date)
 	
 	$MainMenuPanel.show()
 	$DiaryPanel.hide()
@@ -34,19 +29,6 @@ func _on_EmotionsButton_pressed():
 #colorspanel
 func _on_GenerateButton_pressed():
 	$ColorsPanel.hide()
-	
-#	var sel = get_node("ColorsPanel").select
-#
-#	if(sel):
-#		print("select")
-#		colors_chosen = get_node("ColorsPanel").select_colors
-#	else:
-#		print("pool")
-#		colors_chosen = get_node("ColorsPanel").pool_colors
-#
-#	for i in range(colors_chosen.size()): # debug
-#		print(colors_chosen[i])
-		
 	$ImagePanel.show()
 	
 
@@ -70,4 +52,9 @@ func _on_DiaryButton_pressed():
 
 func _on_SaveButton_pressed():
 	#get_node("ImagePanel/ImageControl/ViewportContainer/Viewport/GeneratedImagePanel")
+	$EmotionsPanel.hide()
+	$ColorsPanel.hide()
+	$ImagePanel.hide()
+	$MainMenuPanel.hide()
+	$DiaryPanel.show()
 	pass
